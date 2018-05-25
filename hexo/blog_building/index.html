@@ -115,7 +115,7 @@
 <meta property="og:image" content="http://source.hirraeth.com/blog/hexo_github/9.jpg">
 <meta property="og:image" content="http://source.hirraeth.com/blog/hexo_github/10.png">
 <meta property="og:image" content="http://source.hirraeth.com/blog/hexo_github/11.jpg">
-<meta property="og:updated_time" content="2018-05-25T08:51:13.283Z">
+<meta property="og:updated_time" content="2018-05-25T14:28:14.709Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo+GitHub本地搭建静态博客">
 <meta name="twitter:description" content="GitHub+Hexo创建静态个人博客傻瓜式教学">
@@ -203,7 +203,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">风居住的街道...</p>
+        <h1 class="site-subtitle" itemprop="description">风居住的街道...</h1>
       
   </div>
 
@@ -312,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hexo+GitHub本地搭建静态博客</h1>
+          <h2 class="post-title" itemprop="name headline">hexo+GitHub本地搭建静态博客</h2>
         
 
         <div class="post-meta">
@@ -340,7 +340,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-25T16:51:13+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-25T22:28:14+08:00">
                 2018-05-25
               </time>
             
@@ -379,7 +379,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,709
+                  1,674
                 </span>
               
 
@@ -428,7 +428,7 @@
 <hr>
 <h2 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h2><h3 id="1-1-搭建Node-js环境"><a href="#1-1-搭建Node-js环境" class="headerlink" title="1.1 搭建Node.js环境"></a>1.1 搭建Node.js环境</h3><p>Hexo是基于Node.js搭建的博客系统，所以我们需要在本地安装搭建Node.js环境。<br>Node.js有官方网站，可以直接下载，<a href="https://nodejs.org/en/" target="_blank" rel="noopener">点击下载</a><br>由于中国网络的原因，从境外下载也可以选择镜像源，这里提供一个<a href="https://npm.taobao.org/mirrors/node/" target="_blank" rel="noopener">淘宝镜像源</a>供大家下载安装。<br>软件很小，大家安装过程中直接一路按Next即可。<br>安装完成后，可以在命令窗口,比如说<code>Windows</code>的<code>cmd</code>，使用<code>node -v</code>，查看显示版本判断安装是否成功。</p>
 <h3 id="1-2安装Git工具"><a href="#1-2安装Git工具" class="headerlink" title="1.2安装Git工具"></a>1.2安装Git工具</h3><p>Git是一个开源的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。我们使用Git可以快速高效的将本地博客文件部署到GitHub上。<br>同样，我们可以在<a href="https://git-scm.com/" target="_blank" rel="noopener">Git官网</a>下载最新版本的安装包。<br>同样受限于中国网络政策，博主下载了好多次都已失败告终。好在中国存在Git的镜像源，附上<a href="https://npm.taobao.org/mirrors/git-for-windows/" target="_blank" rel="noopener">链接</a><br>安装过程同样一路Next即可。命令行输入<code>Git --version</code> ，确认是否安装成功</p>
-<h3 id="1-3安装Hexo博客框架工具"><a href="#1-3安装Hexo博客框架工具" class="headerlink" title="1.3安装Hexo博客框架工具"></a>1.3安装Hexo博客框架工具</h3><p>首先，我们在电脑中创建一个文件夹，用来存放Hexo博客框架工具以及存放博客本地源文件，比如说博主的文件夹位置时是<code>D:\Hexo</code>.<br><img src="http://source.hirraeth.com/blog/hexo_github/hexo%E6%96%87%E6%A1%A3.jpg" alt="安装目录" style="width:100%"><br>打开我们创建的Hexo文件夹，鼠标反键点击<span class="label success">Git Bash Here</span>，在命令框输入命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-3安装Hexo博客框架工具"><a href="#1-3安装Hexo博客框架工具" class="headerlink" title="1.3安装Hexo博客框架工具"></a>1.3安装Hexo博客框架工具</h3><p>首先，我们在电脑中创建一个文件夹，用来存放Hexo博客框架工具以及存放博客本地源文件，比如说博主的文件夹位置时是<code>D:\Hexo</code>.<br><img src="http://source.hirraeth.com/blog/hexo_github/hexo%E6%96%87%E6%A1%A3.jpg" alt="安装目录" style="width:100%"><br>打开我们创建的Hexo文件夹，鼠标反键点击<span class="label success">Git Bash Here</span>，在命令框输入命令：<br><figure class="highlight shell"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> npm install hexo-cli -g</span></div></pre></div></div></figure></p>
 <p>然后文件夹将会增加一些文件。</p>
 <h3 id="1-4注册GitHub账号"><a href="#1-4注册GitHub账号" class="headerlink" title="1.4注册GitHub账号"></a>1.4注册GitHub账号</h3><p>GitHub是一个面向开源的代码托管网站。将静态博客页面直接部署在GitHub Pages上，选择GitHub一个原因是免费，再个是管理比较省心。GitHub提供1G大小的储存空间，一个月100G的流量限制，对于个人用户来讲完全足够。</p>
 <div class="note info"><p>对于国内用户来讲，如果追求访问速度的话，也可以选则<a href="coding.net">Coding</a>。设置方法百度即可。</p></div><br>首先我们访问GitHub的<a href="https://github.com" target="_blank" rel="noopener">官方网站</a>,打开的界面就是这样的：<br><img src="http://source.hirraeth.com/blog/hexo_github/1.png" alt="打开首页" style="width:100%"><br>如果大家有账号的话就直接登录进去，没有的话就注册一个。<br><div class="note info"><p>  注册时要想好ID，这个后面GitHub分配域名时使用。（虽然后面可以修改）<br><br>自己注册有额外域名的除外。</p></div><br>进去之后是大家的主页面：<br><img src="http://source.hirraeth.com/blog/hexo_github/2.png" alt="GitHub首页" style="width:100% "><br>然后，我们点击右上角的<span class="label danger">+</span>,选择<span class="label success">New repository</span>,进入下面的界面：<br><img src="http://source.hirraeth.com/blog/hexo_github/3.png" alt="创建page" style="width:100%"><br>我们填写好GitHub给我们提供的域名<span class="label success">XXX.github.io</span>，前面的xxx是你注册GitHub时所填写的id。<br>在描述中填写好博客描述。<br>选择公共可读，点击<span class="label success">Create repository</span>，进入下面的界面。<br><img src="http://source.hirraeth.com/blog/hexo_github/4.png" alt="设置页面" style="width:100% "><br>我们选择<span class="label success">Settings</span>，填写好我们刚才得到的域名。<br><br><div class="note danger"><p> 如果在万网等网站注册过域名的话，可以直接到此为止，跳过此小结。</p></div>
@@ -437,20 +437,20 @@
 <h4 id="1-4-1-私有域名的解析"><a href="#1-4-1-私有域名的解析" class="headerlink" title="1.4.1 私有域名的解析"></a>1.4.1 私有域名的解析</h4><p><div class="note danger"><p> 此小节主要讲解需要绑定私有域名情况</p></div><br>我们进入到我们域名提供商的控制台界面。选择域名栏目。<br><img src="http://source.hirraeth.com/blog/hexo_github/6.png" alt="设置页面" style="width:100% "><br>我们看到在域名后面有<code>解析</code>选项，点击进入：<br><img src="http://source.hirraeth.com/blog/hexo_github/7.png" alt="设置页面" style="width:100% "><br>     选择CNAME解析，解析到在GitHub上得到的域名。<br>     然后GitHub篇结束。</p>
 <p><div class="note success"><p> 现在，我们在浏览器输入GitHub提供的域名或者我们自己绑定的域名就可以顺利访问啦~~~</p></div></p>
 <h3 id="1-5-配置SSH-Key"><a href="#1-5-配置SSH-Key" class="headerlink" title="1.5 配置SSH Key"></a>1.5 配置SSH Key</h3><p>我们在用Git提交源文件到GitHub上需要拥有GitHub操作权限，但是直接使用用户名与密码不安全，于是就有了SSH Key来连接本地与GitHub之间的通信。</p>
-<h4 id="1-5-1设置Git的username和email"><a href="#1-5-1设置Git的username和email" class="headerlink" title="1.5.1设置Git的username和email"></a>1.5.1设置Git的username和email</h4><p>打开git Bash控制终端：<br><figure class="highlight diff"><figcaption><span>【配置Git命令】</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name "xxxxxxxxxx"</span><br><span class="line">git config --global user.email "xxxxxxxxx@email.com"</span><br></pre></td></tr></table></figure></p>
-<h5 id="1-5-2-生成SSH"><a href="#1-5-2-生成SSH" class="headerlink" title="1.5.2 生成SSH"></a>1.5.2 生成SSH</h5><p>新打开终端：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ssh-keygen</span> <span class="selector-tag">-t</span> <span class="selector-tag">rsa</span> <span class="selector-tag">-C</span> "<span class="selector-tag">xxxxxxxx</span>@<span class="keyword">email</span>.<span class="keyword">com</span>"</span><br><span class="line">连续按三次回车</span><br></pre></td></tr></table></figure></p>
+<h4 id="1-5-1设置Git的username和email"><a href="#1-5-1设置Git的username和email" class="headerlink" title="1.5.1设置Git的username和email"></a>1.5.1设置Git的username和email</h4><p>打开git Bash控制终端：<br><figure class="highlight diff"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></div><div class="code"><pre><div class="line">git config --global user.name "xxxxxxxxxx"</div><div class="line">git config --global user.email "xxxxxxxxx@email.com"</div></pre></div></div></figure></p>
+<h5 id="1-5-2-生成SSH"><a href="#1-5-2-生成SSH" class="headerlink" title="1.5.2 生成SSH"></a>1.5.2 生成SSH</h5><p>新打开终端：<br><figure class="highlight css"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></div><div class="code"><pre><div class="line"><span class="selector-tag">ssh-keygen</span> <span class="selector-tag">-t</span> <span class="selector-tag">rsa</span> <span class="selector-tag">-C</span> "<span class="selector-tag">xxxxxxxx</span>@<span class="keyword">email</span>.<span class="keyword">com</span>"</div><div class="line">连续按三次回车</div></pre></div></div></figure></p>
 <p>生成路径C:/users/name/.ssh/</p>
 <h4 id="1-5-3配置到GitHub"><a href="#1-5-3配置到GitHub" class="headerlink" title="1.5.3配置到GitHub"></a>1.5.3配置到GitHub</h4><p>打开GitHub，点击头像，选择<span class="label success">Settings</span>。<br><img src="http://source.hirraeth.com/blog/hexo_github/8.jpg" alt="SSH设置" style="width:100% "><br><img src="http://source.hirraeth.com/blog/hexo_github/9.jpg" alt="SSH设置" style="width:100% "><br><img src="http://source.hirraeth.com/blog/hexo_github/10.png" alt="SSH设置" style="width:100% "><br><code>Title</code>随便填写。<br><code>Key</code>就填写我们在前面生成的<code>.ssh</code>文件夹下的<code>id_rsa.pub</code>内的文件内容。<br>前期准备就结束了，下面就是激动人心的写博客环节啦~~</p>
 <hr>
-<h2 id="二、Hexo本地配置与文件创建"><a href="#二、Hexo本地配置与文件创建" class="headerlink" title="二、Hexo本地配置与文件创建"></a>二、Hexo本地配置与文件创建</h2><h3 id="2-1-Hexo初始化"><a href="#2-1-Hexo初始化" class="headerlink" title="2.1 Hexo初始化"></a>2.1 Hexo初始化</h3><p>在Hexo文件夹中，打开Git Bash：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></p>
-<p>然后：<br><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">generate</span>  <span class="comment">//生成静态文件 也可以直接 hexo g</span></span><br><span class="line">hexo server <span class="comment">//启动服务器  亦可以hexo s  需要debug直接在命令后加debug</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="二、Hexo本地配置与文件创建"><a href="#二、Hexo本地配置与文件创建" class="headerlink" title="二、Hexo本地配置与文件创建"></a>二、Hexo本地配置与文件创建</h2><h3 id="2-1-Hexo初始化"><a href="#2-1-Hexo初始化" class="headerlink" title="2.1 Hexo初始化"></a>2.1 Hexo初始化</h3><p>在Hexo文件夹中，打开Git Bash：<br><figure class="highlight plain"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></div><div class="code"><pre><div class="line">hexo init</div><div class="line">npm install</div></pre></div></div></figure></p>
+<p>然后：<br><figure class="highlight verilog"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></div><div class="code"><pre><div class="line">hexo <span class="keyword">generate</span>  <span class="comment">//生成静态文件 也可以直接 hexo g</span></div><div class="line">hexo server <span class="comment">//启动服务器  亦可以hexo s  需要debug直接在命令后加debug</span></div></pre></div></div></figure></p>
 <p>在浏览器中输入<span class="label success">localhost：4000</span>即可访问界面。</p>
-<h3 id="2-2-配置上传GitHub文件"><a href="#2-2-配置上传GitHub文件" class="headerlink" title="2.2 配置上传GitHub文件"></a>2.2 配置上传GitHub文件</h3><p>在本地文件夹中找到_config.yml文件，打开编辑：<br><figure class="highlight diff"><figcaption><span>D:\Hexo\_config.yml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:leberte/leberte.github.io.git  //改为你自己在GitHub上的地址</span><br><span class="line">  branch: master  //改为你自己在GitHub上的分支</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-2-配置上传GitHub文件"><a href="#2-2-配置上传GitHub文件" class="headerlink" title="2.2 配置上传GitHub文件"></a>2.2 配置上传GitHub文件</h3><p>在本地文件夹中找到_config.yml文件，打开编辑：<br><figure class="highlight diff"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></div><div class="code"><pre><div class="line"># Deployment</div><div class="line">## Docs: https://hexo.io/docs/deployment.html</div><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repository: git@github.com:leberte/leberte.github.io.git  //改为你自己在GitHub上的地址</div><div class="line">  branch: master  //改为你自己在GitHub上的分支</div></pre></div></div></figure></p>
 <p><br><br><img src="http://source.hirraeth.com/blog/hexo_github/11.jpg" alt="上传GitHub设置" style="width:100% "></p>
-<h3 id="2-3-文章渲染与上传"><a href="#2-3-文章渲染与上传" class="headerlink" title="2.3 文章渲染与上传"></a>2.3 文章渲染与上传</h3><p>同样在Hexo所在目录下：<br><figure class="highlight plain"><figcaption><span>Git Bash命令</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo claen</span><br><span class="line">hexo g</span><br><span class="line">hexo d  //上传到GitHub页面</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-3-文章渲染与上传"><a href="#2-3-文章渲染与上传" class="headerlink" title="2.3 文章渲染与上传"></a>2.3 文章渲染与上传</h3><p>同样在Hexo所在目录下：<br><figure class="highlight plain"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></div><div class="code"><pre><div class="line">hexo claen</div><div class="line">hexo g</div><div class="line">hexo d  //上传到GitHub页面</div></pre></div></div></figure></p>
 <hr>
-<h2 id="三、基于Markdown语法博客文章书写"><a href="#三、基于Markdown语法博客文章书写" class="headerlink" title="三、基于Markdown语法博客文章书写"></a>三、基于Markdown语法博客文章书写</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> <span class="string">"article_name"</span></span><br></pre></td></tr></table></figure>
-<p>然后在D:\Hexo\source_posts中会出现article_name.MD的文件。<br>写完后。<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">hexo clean //清空缓存</span><br><span class="line">hexo g //生成文章</span><br><span class="line">hexo s //创建服务器，打开网址localhost:4000即可查看</span><br><span class="line">'''</span><br><span class="line">上述检查文章无误后，上传到GitHub上，就可以直接域名访问啦~~</span><br><span class="line">'''</span><br><span class="line">hexo clean  //清空缓存</span><br><span class="line">hexo g  //生成文章</span><br><span class="line">hexo d //上传至GitHub</span><br></pre></td></tr></table></figure></p>
+<h2 id="三、基于Markdown语法博客文章书写"><a href="#三、基于Markdown语法博客文章书写" class="headerlink" title="三、基于Markdown语法博客文章书写"></a>三、基于Markdown语法博客文章书写</h2><figure class="highlight actionscript"><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line">hexo <span class="keyword">new</span> <span class="string">"article_name"</span></div></pre></div></div></figure>
+<p>然后在D:\Hexo\source_posts中会出现article_name.MD的文件。<br>写完后。<br><figure class="highlight asciidoc"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></div><div class="code"><pre><div class="line">hexo clean //清空缓存</div><div class="line">hexo g //生成文章</div><div class="line">hexo s //创建服务器，打开网址localhost:4000即可查看</div><div class="line">'''</div><div class="line">上述检查文章无误后，上传到GitHub上，就可以直接域名访问啦~~</div><div class="line">'''</div><div class="line">hexo clean  //清空缓存</div><div class="line">hexo g  //生成文章</div><div class="line">hexo d //上传至GitHub</div></pre></div></div></figure></p>
 <p>关于Markdown写作推荐：</p>
 <ul>
 <li><a href="https://markdown.tw/" target="_blank" rel="noopener">Markdown 语法</a></li>
@@ -463,7 +463,7 @@
 <h2 id="四、主题配置"><a href="#四、主题配置" class="headerlink" title="四、主题配置"></a>四、主题配置</h2><p>在生成网页时，我们发现网页的布局不是非常的漂亮，不过GitHub上大佬非常多。<br>大家可以直接去Hexo社区寻找，里面包含很多主题，博主选择的是Next主题。<br><a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/README.md" target="_blank" rel="noopener">最新v6.0地址</a><br>详细的安装过程：<a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/INSTALLATION.md" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/INSTALLATION.md</a><br>关于后面的配置问题，开发者给出的文档非常详细。链接：<a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">点击查看</a></p>
 <p>对于官方没有讲到的，我们怎样对主题进一步优化，有博主做了一份很详尽的讲解，强烈推荐。<a href="https://reuixiy.github.io/technology/computer/computer-aided-art/2017/06/09/hexo-next-optimization.html" target="_blank" rel="noopener">点击查看</a></p>
 <h2 id="五、结束"><a href="#五、结束" class="headerlink" title="五、结束"></a>五、结束</h2><p>现在，博客建完啦~~<br>大家开启发现之旅吧~~<br>听会歌儿吧~<br>
-    <div id="aplayer-lwOlyLWe" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="28815250" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="true" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#ad7a86"></div></p>
+    <div id="aplayer-JDMHdKHf" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="28815250" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="false" data-listmaxheight="340px" data-preload="none" data-theme="#ad7a86"></div></p>
 
       
     </div>
@@ -628,7 +628,7 @@
                 alt="Leberte" />
             
               <p class="site-author-name" itemprop="name">Leberte</p>
-              <p class="site-description motion-element" itemprop="description">一个计算机爱好者，主修土木工程。</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
           <nav class="site-state motion-element">
@@ -879,6 +879,9 @@ show_date_time();
   <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
 
   <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
 
 
 
