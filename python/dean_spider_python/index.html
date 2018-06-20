@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,spider，树莓派," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="python爬虫实现学校信息爬取邮件发送到个人邮箱并通过QQ发送消息到班级群">
+<meta name="keywords" content="python,spider，树莓派">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python实现学校信息邮件定时发送并转发到班级QQ群——部署在树莓派">
+<meta property="og:url" content="https://hirraeth.com/python//dean_spider_python/index.html">
+<meta property="og:site_name" content="Leberte的博客">
+<meta property="og:description" content="python爬虫实现学校信息爬取邮件发送到个人邮箱并通过QQ发送消息到班级群">
+<meta property="og:locale" content="python">
+<meta property="og:image" content="
+http://source.hirraeth.com/blog/dean/%E7%BD%91%E9%A1%B5%E6%96%B9%E5%BC%8F.png">
+<meta property="og:image" content="
+http://source.hirraeth.com/blog/dean/%E8%A1%A8%E5%8D%95%E5%88%86%E6%9E%90.png">
+<meta property="og:image" content="
+http://source.hirraeth.com/blog/dean/%E9%82%AE%E4%BB%B6%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="
+http://source.hirraeth.com/blog/dean/%E8%AF%A6%E7%BB%86%E5%86%85%E5%AE%B9.png">
+<meta property="og:updated_time" content="2018-06-18T14:53:00.586Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python实现学校信息邮件定时发送并转发到班级QQ群——部署在树莓派">
+<meta name="twitter:description" content="python爬虫实现学校信息爬取邮件发送到个人邮箱并通过QQ发送消息到班级群">
+<meta name="twitter:image" content="
+http://source.hirraeth.com/blog/dean/%E7%BD%91%E9%A1%B5%E6%96%B9%E5%BC%8F.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":"ture","onmobile":"ture"},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://hirraeth.com/python//dean_spider_python/"/>
+
+
+
+
+
+  <title>python实现学校信息邮件定时发送并转发到班级QQ群——部署在树莓派 | Leberte的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?127179569cd9e2138da3862501e2a57c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="python">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Leberte的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">风居住的街道...</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hirraeth.com/python/dean_spider_python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Leberte">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/toux.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leberte的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">python实现学校信息邮件定时发送并转发到班级QQ群——部署在树莓派</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-25T17:01:37+08:00">
+                2018-05-25
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-06-18T22:53:00+08:00">
+                2018-06-18
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/python/dean_spider_python/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="python//dean_spider_python/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,577
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  16
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <center><strong>python爬虫实现学校信息爬取</strong><br><strong>邮件发送到个人邮箱</strong><br><strong>并通过QQ发送消息到班级群</strong></center>
+
+<a id="more"></a>
+<hr>
+<h3 id="前期所需python安装库"><a href="#前期所需python安装库" class="headerlink" title="前期所需python安装库"></a>前期所需python安装库</h3><ul>
+<li>BeautifunSoup</li>
+<li>mysql-connector-python</li>
+<li>requests</li>
+<li>qqbot</li>
+</ul>
+<hr>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li>学校网站信息的爬取</li>
+<li>数据库的查询与写入</li>
+<li>邮件的发送</li>
+<li>QQ消息的发送</li>
+<li>邮件内容的优化</li>
+<li>Linux的环境配置与定时运行</li>
+<li>问题与解决方案</li>
+</ul>
+<h2 id="一、摘要"><a href="#一、摘要" class="headerlink" title="一、摘要"></a>一、摘要</h2><p>最近在学习python的爬虫，突然想到一个点子：学校教务以及学生工作处每天都在更新信息，如果每天都去访问网站的话显得太浪费时间，但是有些信息又非常重要，那么可不可以有一个程序直接把消息发给我呢？于是，诞生了这个项目。<br>实现这个项目，首先，我们需要将学校教务网上的信息爬取出来，然后进行筛选，将最新的消息通过email的形式发送到我的邮件。最近浏览GitHub时发现大佬写过一个QQ机器人的项目，想到我可以更加直接的推送到常常使用的QQ上，就诞生后面的QQ通知。<br>在实现数据处理时，mysql小白的我经历过痛苦的事情，具体问题后面解释。</p>
+<h2 id="二、学校网站信息的爬取"><a href="#二、学校网站信息的爬取" class="headerlink" title="二、学校网站信息的爬取"></a>二、学校网站信息的爬取</h2><p>我们打开学校的教务网：<br><img src="
+http://source.hirraeth.com/blog/dean/%E7%BD%91%E9%A1%B5%E6%96%B9%E5%BC%8F.png" alt="教务首页" style="width:100% "><br>然后按照常规操作，按<span class="label success">F12</span>打开控制台界面，打开Network栏，我们看见一系列的加载文件，点击发现第一个文件就是网页加载的文本文件，也就是我们需要的文件，点击进去。在headers界面，我们了解到获取文件的URL，并且对URL的操作为GET请求。</p>
+<figure class="highlight python"><figcaption><span class="caption">请求表头构造</span></figcaption><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></div><div class="code"><pre><div class="line">url = <span class="string">'http://xxxxxx.com/vatuu/NewsAction?setAction=NewsMore&amp;type=form&amp;bigTypeId=0&amp;kw='</span>    <span class="comment">#爬取网页的链接</span></div><div class="line">HOST = <span class="string">'http://xxxxxx.com'</span></div><div class="line">headers = &#123;</div><div class="line">    <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'</span>,</div><div class="line">    <span class="string">'Host'</span>: HOST.replace(<span class="string">'http://'</span>, <span class="string">''</span>)</div><div class="line">&#125;</div></pre></div></div></figure>
+<p>弄清楚表头文件之后，我们就需要对网页进行解析，进而得到所需要的文件。<br><img src="
+http://source.hirraeth.com/blog/dean/%E8%A1%A8%E5%8D%95%E5%88%86%E6%9E%90.png" alt="教务首页" style="width:100% "></p>
+<p>在elements中查看网页的源代码发现，我们需要的信息在网页中的布局有下面的结构：</p>
+<blockquote>
+<p>div</p>
+<blockquote>
+<p>h3</p>
+<blockquote>
+<p>a</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>p</p>
+<blockquote>
+<p>span</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>所以，我们利用beautifulsoup强大的解析能力就可以提取到相应的内容。<br><figure class="highlight python"><figcaption><span class="caption">网页内容的提取</span></figcaption><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></div><div class="code"><pre><div class="line">response = requests.get(url, headers=headers,timeout = <span class="number">10</span>)       <span class="comment">#get请求网站</span></div><div class="line">info = BeautifulSoup(response.content,<span class="string">"html.parser"</span>)             <span class="comment">#beautifulsoup解析网站</span></div><div class="line">result = info.find_all(<span class="string">'div'</span>,&#123;<span class="string">'class'</span>:<span class="string">'littleResultDiv'</span>&#125;)        <span class="comment">#取出信息存在的位置</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range (len(result)):</div><div class="line">    info2 = BeautifulSoup(str(result[i]),<span class="string">"html.parser"</span>)          <span class="comment">#在div标签下beautifulsoup解析网页</span></div><div class="line">    title = info2.find(<span class="string">'h3'</span>).find(<span class="string">'a'</span>).text                      <span class="comment">#找出h3-&gt;a标签下的文章标题</span></div><div class="line">    lianjie = HOST + info2.find(<span class="string">'p'</span>,&#123;<span class="string">'class'</span>:<span class="string">'relativeInfo clearfix'</span>&#125;).find(<span class="string">'a'</span>).attrs[<span class="string">'href'</span>].replace(<span class="string">'.'</span>,<span class="string">''</span>) <span class="comment">#找出网站下的链接p-&gt;a-&gt;href</span></div><div class="line">    time = info2.find(<span class="string">'p'</span>,&#123;<span class="string">'class'</span>:<span class="string">'relativeInfo clearfix'</span>&#125;).find_all(<span class="string">'span'</span>)[<span class="number">0</span>].text   <span class="comment">#找出文章发布的时间p-&gt;span</span></div><div class="line">    a.append([time,lianjie,title])    <span class="comment">#将三个数据创建为一个list</span></div></pre></div></div></figure></p>
+<p>返回的数据为list类型，[[时间，文章链接，文章标题]，[时间，文章链接，文章标题]…]</p>
+<hr>
+<h2 id="三、数据库的查询与写入"><a href="#三、数据库的查询与写入" class="headerlink" title="三、数据库的查询与写入"></a>三、数据库的查询与写入</h2><h3 id="数据库的操作封装"><a href="#数据库的操作封装" class="headerlink" title="数据库的操作封装"></a>数据库的操作封装</h3><p>在对数据库的写入与查询过程中，需要多次对数据库的基本信息多次书写，我们可以将其包装成类，便于后续操作。<br><figure class="highlight python"><figcaption><span class="caption">类的包装</span></figcaption><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></div><div class="code"><pre><div class="line"><span class="comment">#!/user/bin/python3</span></div><div class="line"><span class="comment"># _*_ coding: utf-8 _*_</span></div><div class="line"><span class="string">'''</span></div><div class="line"><span class="string">athour : xu</span></div><div class="line"><span class="string">date : 2018-05-12</span></div><div class="line"><span class="string">'''</span></div><div class="line"><span class="keyword">import</span> mysql.connector</div><div class="line"><span class="keyword">from</span> sendmail <span class="keyword">import</span> mailcuowu</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MysqlHelper</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,host=<span class="string">'localhost'</span>,port=<span class="string">'3306'</span>,db=<span class="string">'school_info'</span>,user=<span class="string">'root'</span>,passwd=<span class="string">'xxxxxxx'</span>,charset=<span class="string">'utf8'</span>)</span>:</span></div><div class="line">        self.host = host</div><div class="line">        self.port = port</div><div class="line">        self.db = db</div><div class="line">        self.user = user</div><div class="line">        self.passwd = passwd</div><div class="line">        self.charset = charset</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">connect</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            self.conn=mysql.connector.connect(host=self.host,port=self.port,db=self.db,user=self.user,passwd=self.passwd,charset=self.charset)</div><div class="line">            self.cursor=self.conn.cursor()</div><div class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">close</span><span class="params">(self)</span>:</span></div><div class="line">        self.cursor.close()</div><div class="line">        self.conn.close()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_one</span><span class="params">(self,sql,params=<span class="params">()</span>)</span>:</span></div><div class="line">        result=<span class="keyword">None</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            self.connect()</div><div class="line">            self.cursor.execute(sql, params)</div><div class="line">            result = self.cursor.fetchone()</div><div class="line">            self.close()</div><div class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</div><div class="line">            <span class="keyword">pass</span></div><div class="line">        <span class="keyword">return</span> result</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_all</span><span class="params">(self,sql,params=<span class="params">()</span>)</span>:</span></div><div class="line">        list1 = []</div><div class="line">        list2 = []</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            self.connect()</div><div class="line">            self.cursor.execute(sql,params)</div><div class="line">            list1  =self.cursor.fetchall()</div><div class="line">            self.close()</div><div class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</div><div class="line">            <span class="keyword">pass</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> list1:</div><div class="line">            list2.append(list(i)[<span class="number">0</span>])</div><div class="line">        <span class="keyword">return</span> list2</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insert</span><span class="params">(self,sql,params=<span class="params">()</span>)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.__edit(sql,params)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update</span><span class="params">(self, sql, params=<span class="params">()</span>)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.__edit(sql, params)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">delete</span><span class="params">(self, sql, params=<span class="params">()</span>)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.__edit(sql, params)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__edit</span><span class="params">(self,sql,params)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            count=<span class="number">0</span></div><div class="line">            self.connect()</div><div class="line">            count=self.cursor.execute(sql,params)</div><div class="line">            self.conn.commit()</div><div class="line">            self.close()</div><div class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</div><div class="line">        <span class="keyword">return</span> count</div></pre></div></div></figure></p>
+<h3 id="数据库的写入与查询"><a href="#数据库的写入与查询" class="headerlink" title="数据库的写入与查询"></a>数据库的写入与查询</h3><p>我们已经提取到了所需要的相关信息，但是，是不是最新的消息就需要我们做一个判断。<br>按照我们前面的思路，我们将爬取到的内容做一个处理，提取出消息发布的时间点，然后对时间做一个去重处理。<br><figure class="highlight python"><figcaption><span class="caption">时间的处理</span></figcaption><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></div><div class="code"><pre><div class="line">info = get_yanghau() + vatuu()   <span class="comment">#运行爬取代码</span></div><div class="line">x = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> info:</div><div class="line">    x.append(i[<span class="number">0</span>])</div><div class="line">x1 = set(x)   <span class="comment">#获取info中的time信息，并转换为集合，目的为去除重复的日期，保留单一的日期</span></div></pre></div></div></figure></p>
+<p>完成时间的处理后，我们就要想办法将提取到的数据与爬取到的数据进行一个匹配，考虑到提高匹配的准确率，我们知道学校发布每一个信息都有其独一无二的URL，所以，我们决定用URL做匹配。<br>我们来链接数据库，数据库提取语句<code>SELECT url FROM school WHERE time = %s</code>，然后将该日期下的URL提出来，判断爬取数据中是否存在该URL，若有，则删除，最后，将清洗完的数据储存起来。<br><figure class="highlight python"><figcaption><span class="caption">数据库信息的提取</span></figcaption><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></div><div class="code"><pre><div class="line">sql = MysqlHelper()   <span class="comment">#数据库类实例化</span></div><div class="line"></div><div class="line">sql_result = []</div><div class="line"><span class="keyword">for</span> j <span class="keyword">in</span> list(x1):</div><div class="line">    order = <span class="string">"SELECT url FROM school WHERE time = %s"</span>  <span class="comment">#从数据库中选出刚筛选的日期</span></div><div class="line">    parama = (j,)</div><div class="line">    sql_result.append(sql.get_all(order,parama))  <span class="comment">#执行语句</span></div><div class="line"></div><div class="line">sql_result_final = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> sql_result:</div><div class="line">    sql_result_final += i  <span class="comment">#连接成list</span></div></pre></div></div></figure></p>
+<p>然后，将筛选完的数据保存在数据库中，为下一次做准备。<br><figure class="highlight python"><figcaption><span class="caption">保存数据到数据库</span></figcaption><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></div><div class="code"><pre><div class="line">result = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> info:</div><div class="line">    <span class="keyword">if</span> i[<span class="number">1</span>] <span class="keyword">not</span> <span class="keyword">in</span> sql_result_final:  <span class="comment">#将在数据库中存在的信息删除，保留不存在的数据</span></div><div class="line">        result.append(i)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">continue</span></div><div class="line"><span class="keyword">if</span> result != []:</div><div class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> result:</div><div class="line">        order2 = <span class="string">"INSERT INTO school(time,url,title) VALUES (%s,%s,%s)"</span>  <span class="comment">#将多余的数据存入数据库</span></div><div class="line">        parama2 = (item[<span class="number">0</span>],item[<span class="number">1</span>],item[<span class="number">2</span>])</div><div class="line">        sql.insert(order2,parama2)</div></pre></div></div></figure></p>
+<hr>
+<h2 id="四、邮件的发送"><a href="#四、邮件的发送" class="headerlink" title="四、邮件的发送"></a>四、邮件的发送</h2><p>对于邮件的发送，我们用的是python的smtplib模块。<br>模块是python自带的，网上很容易搜索到教程。<br><figure class="highlight python"><figcaption><span class="caption">邮件发送表头</span></figcaption><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></div><div class="code"><pre><div class="line"><span class="comment">#!/user/bin/python3</span></div><div class="line"><span class="comment"># _*_ coding: utf-8 _*_</span></div><div class="line"><span class="string">'''</span></div><div class="line"><span class="string">athour : xu</span></div><div class="line"><span class="string">date : 2018-05-12</span></div><div class="line"><span class="string">'''</span></div><div class="line"><span class="keyword">import</span> smtplib</div><div class="line"><span class="keyword">from</span> email.mime.multipart <span class="keyword">import</span> MIMEMultipart</div><div class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</div><div class="line"><span class="keyword">from</span> email.header <span class="keyword">import</span> Header</div><div class="line"><span class="comment">#第三方模块</span></div><div class="line">smtpserver = <span class="string">'smtp.163.com'</span>   <span class="comment">#网易的邮箱服务器</span></div><div class="line">username = <span class="string">'xxxxx@163.com'</span>    <span class="comment">#发邮件的账号</span></div><div class="line">password = <span class="string">'password'</span>         <span class="comment">#密码</span></div><div class="line"></div><div class="line">sender = <span class="string">'xxxx@163.com'</span>  <span class="comment">#发送人邮箱账号</span></div><div class="line">receiver = [<span class="string">''</span>,<span class="string">''</span>,<span class="string">''</span>]  <span class="comment">#接收者邮箱账号</span></div><div class="line">subject = Header(<span class="string">'学校发送新通知了！'</span>, <span class="string">'utf-8'</span>).encode()  <span class="comment">#邮件主题</span></div><div class="line">msg = MIMEMultipart(<span class="string">'mixed'</span>)</div><div class="line">msg[<span class="string">'Subject'</span>] = subject  <span class="comment">#邮件标题</span></div><div class="line">msg[<span class="string">'From'</span>] = <span class="string">'message &lt;xxxx@163.com&gt;'</span>  <span class="comment">#发件人</span></div><div class="line">msg[<span class="string">'To'</span>] = <span class="string">";"</span>.join(receiver)          <span class="comment">#收件人</span></div></pre></div></div></figure></p>
+<p>然后，我们将刚才拿到的需要推送的数据进行一个组合，转换成我们需要发送的话。<br><figure class="highlight python"><figcaption><span class="caption">邮件内容</span></figcaption><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></div><div class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">mail_message</span><span class="params">(result)</span>:</span></div><div class="line">    context = <span class="string">'学校更新下面通知啦~'</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> result:</div><div class="line">        context += i[<span class="number">2</span>] + <span class="string">"\n"</span>+ i[<span class="number">1</span>]+<span class="string">"\n"</span>+<span class="string">"发布时间为:"</span>+ i[<span class="number">0</span>]+<span class="string">'\n'</span>   <span class="comment">#将list里面的信息组合成一句话</span></div><div class="line">    text = context</div><div class="line">    text_plain = MIMEText(text, <span class="string">'plain'</span>, <span class="string">'utf-8'</span>)</div><div class="line">    msg.attach(text_plain)</div><div class="line"></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        smtp = smtplib.SMTP()</div><div class="line">        smtp.connect(<span class="string">'smtp.163.com'</span>)</div><div class="line">        smtp.login(username, password)</div><div class="line">        smtp.sendmail(sender, receiver, msg.as_string())</div><div class="line">        smtp.quit()</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        <span class="keyword">pass</span></div></pre></div></div></figure></p>
+<p>然后就推送到手里啦~~~~</p>
+<p><img src="
+http://source.hirraeth.com/blog/dean/%E9%82%AE%E4%BB%B6%E6%88%AA%E5%9B%BE.png" alt="邮件内容" style="width:100% "><br><img src="
+http://source.hirraeth.com/blog/dean/%E8%AF%A6%E7%BB%86%E5%86%85%E5%AE%B9.png" alt="邮件内容" style="width:100% "></p>
+<hr>
+<h2 id="五、QQ消息的发送"><a href="#五、QQ消息的发送" class="headerlink" title="五、QQ消息的发送"></a>五、QQ消息的发送</h2><p>QQ消息的发送方法，是我无意间浏览GitHub时发现大佬写的。  </p>
+<h3 id="1、QQbot安装"><a href="#1、QQbot安装" class="headerlink" title="1、QQbot安装"></a>1、QQbot安装</h3><p>qqbot 是一个用 python 实现的、基于腾讯 SmartQQ 协议的 QQ 机器人，可运行在 Linux, Windows 和 Mac OSX 平台下。</p>
+<p>本项目 github 地址： <a href="https://github.com/pandolia/qqbot" target="_blank" rel="noopener">https://github.com/pandolia/qqbot</a></p>
+<p>你可以通过扩展 qqbot 来实现：</p>
+<ul>
+<li>监控、收集 QQ 消息</li>
+<li>自动消息推送</li>
+<li>聊天机器人</li>
+<li>通过 QQ 远程控制你的设备</li>
+</ul>
+<p>在 Python 2.7/3.4+ 下使用，用 pip 安装：<br><figure class="highlight shell"><figcaption><span class="caption">安装QQbot</span></figcaption><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line">sudo pip install qqbot</div></pre></div></div></figure></p>
+<p>或者下载 源码 解压后 cd 到该目录并运行： pip install</p>
+<h3 id="2、代码的编写"><a href="#2、代码的编写" class="headerlink" title="2、代码的编写"></a>2、代码的编写</h3><p>在文档中，我们看到有：<br><figure class="highlight perl"><figcaption><span class="caption">官方文档</span></figcaption><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></div><div class="code"><pre><div class="line"><span class="number">1</span>. 启动 QQBot</div><div class="line">在命令行输入： qqbot ，即可启动一个 QQBot 。</div><div class="line"></div><div class="line">启动过程中会自动弹出二维码图片，需要用手机 QQ 客户端扫码并授权登录。启动成功后，会将本次登录信息保存到本地文件中，下次启动时，可以输入： qqbot -<span class="keyword">q</span> qq号码 ，先尝试从本地文件中恢复登录信息（不需要手动扫码），只有恢复不成功或登录信息已过期时才会需要手动扫码登录。一般来说，保存的登录信息将在 <span class="number">2</span> 天之后过期。</div><div class="line"></div><div class="line">注意： Linux 下，需要系统中有 gvfs-<span class="keyword">open</span> 或者 shotwell 命令才能自动弹出二维码图片（一般安装有 GNOME 虚拟文件系统 gvfs 的系统中都会含这两个命令之一）。 Windows1<span class="number">0</span> 下，需要系统中已设置了 png 图片文件的默认打开程序才能自动弹出二维码图片。</div><div class="line"></div><div class="line">若系统无法自动弹出二维码图片，可以手动打开图片文件进行扫码，也可以将二维码显示模式设置为 邮箱模式 、 服务器模式 或 文本模式 进行扫码，详见本文档的第七节。</div><div class="line"></div><div class="line"><span class="number">2</span>. 操作 QQBot</div><div class="line">QQBot 启动后，在另一个控制台窗口使用 qq 命令操作 QQBot </div><div class="line">消息发送命令:</div><div class="line">qq <span class="keyword">send</span> buddy|group|discuss $rinfo $message</div></pre></div></div></figure></p>
+<p>3、然后在代码中添加<br><figure class="highlight python"><figcaption><span class="caption">QQ发送下消息</span></figcaption><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></div><div class="code"><pre><div class="line">    context = <span class="string">'学校更新下面通知啦~'</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> result:</div><div class="line">        context += i[<span class="number">2</span>] + <span class="string">"\n"</span>+ i[<span class="number">1</span>]+<span class="string">"\n"</span>+<span class="string">"发布时间为:"</span>+ i[<span class="number">0</span>]+<span class="string">'\n'</span></div><div class="line">    os.system(<span class="string">'qq send group 土木四班水群 %s！'</span>%context)  <span class="comment">#调用OS模块、发送qq信息</span></div><div class="line"><span class="keyword">else</span>:</div><div class="line">    print(<span class="string">'无更新！'</span>)</div><div class="line">    <span class="keyword">pass</span></div><div class="line">print(<span class="string">'success!'</span>)</div></pre></div></div></figure></p>
+<p>鉴于此，QQ模块加载完成。</p>
+<hr>
+<h2 id="六、邮件内容优化"><a href="#六、邮件内容优化" class="headerlink" title="六、邮件内容优化"></a>六、邮件内容优化</h2><p>在邮件中，存在太多的链接，很容易被邮件服务商给阻断，我们可以有HTML渲染信息，这样，邮件的信息就显得更加简洁、美观。<br>在HTML的渲染中，有很多中方式，在python的web开发中，存在很多渲染模板，这里我们可以采用jinja2的模板。项目地址：<a href="https://github.com/pallets/jinja/tree/master" target="_blank" rel="noopener">https://github.com/pallets/jinja/tree/master</a><br>首先，我们需要安装这个库:<br><figure class="highlight python"><figcaption><span class="caption">安装jinja2</span></figcaption><div class="figcode"><div class="gutter"><pre><div class="line">1</div></pre></div><div class="code"><pre><div class="line">pip install jinja2</div></pre></div></div></figure></p>
+<p>在实现HTML之前，我们需要创建一个基本模板:<br><figure class="highlight html"><figcaption><span class="caption">渲染模板</span></figcaption><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></div><div class="code"><pre><div class="line"><span class="comment">&lt;!-- 可以看一下HTML标签知识，很容易理解 --&gt;</span></div><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>新消息到了~<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"newslist"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">table</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></div><div class="line">        % for post in postlist:</div><div class="line">        <span class="tag">&lt;<span class="name">tr</span> <span class="attr">bgcolor</span>=<span class="string">"$&#123;loop.cycle('#cce0ff', '#e6f0ff')&#125;"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">td</span> <span class="attr">width</span>=<span class="string">"95"</span> <span class="attr">align</span>=<span class="string">"center"</span> <span class="attr">class</span>=<span class="string">"arctime"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">font</span> <span class="attr">size</span> = <span class="string">"3"</span>&gt;</span>&#123;&#123;post.0&#125;<span class="tag">&lt;/<span class="name">font</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">td</span> <span class="attr">class</span>=<span class="string">"arctitle"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">href</span>=<span class="string">&#123;&#123;post.1&#125;&#125;</span> <span class="attr">title</span>=<span class="string">"点击打开链接"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">font</span> <span class="attr">size</span> = <span class="string">"3"</span>&gt;</span>&#123;&#123;post.2&#125;&#125;<span class="tag">&lt;/<span class="name">font</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">        % endfor</div><div class="line">        <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">table</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></div></div></figure></p>
+<p>然后在同样的文件夹中创建一个新的py文件，写入下面内容：<br><figure class="highlight python"><figcaption><span class="caption">HTML渲染代码</span></figcaption><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></div><div class="code"><pre><div class="line"><span class="comment">#!/user/bin/python3</span></div><div class="line"><span class="comment"># _*_ coding: utf-8 _*_</span></div><div class="line"><span class="keyword">from</span> jinja2 <span class="keyword">import</span> PackageLoader,Environment</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">rederHtml</span><span class="params">(postlist)</span>:</span></div><div class="line">    env = Environment(loader=PackageLoader(<span class="string">'python_project'</span>,<span class="string">'templates'</span>))    <span class="comment"># 创建一个包加载器对象</span></div><div class="line">    </div><div class="line">    template = env.get_template(<span class="string">'index.html'</span>)    <span class="comment"># 获取一个模板文件</span></div><div class="line">    result = template.render(postlist)   <span class="comment"># 渲染</span></div><div class="line">    <span class="keyword">return</span> result</div></pre></div></div></figure></p>
+<p>然后我们需要修改发送邮件的代码，将邮件中的text渲染转化为HTML渲染。<br><figure class="highlight python"><figcaption><span class="caption">邮件渲染</span></figcaption><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></div><div class="code"><pre><div class="line diff-addition"><span class="keyword">import</span> rederHtml</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">mail_message</span><span class="params">(result)</span>:</span></div><div class="line diff-addition">    text = rederHTML(result)</div><div class="line">    text_plain = MIMEText(text, <span class="string">'html'</span>, <span class="string">'utf-8'</span>)</div><div class="line">    msg.attach(text_plain)</div></pre></div></div></figure></p>
+<hr>
+<h2 id="七、Linux环境的配置与定时服务"><a href="#七、Linux环境的配置与定时服务" class="headerlink" title="七、Linux环境的配置与定时服务"></a>七、Linux环境的配置与定时服务</h2><h3 id="1、Linux环境的配置"><a href="#1、Linux环境的配置" class="headerlink" title="1、Linux环境的配置"></a>1、Linux环境的配置</h3><p>为了让程序在白天或者24H运行，我们又不想24H把电脑开着，那么可以选择比如阿里云等提供的云服务器服务，博主有一个树莓派，于是就直接部署到树莓派上。<br><figure class="highlight plain"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></div><div class="code"><pre><div class="line">login as: pi</div><div class="line">pi@192.168.1.108&apos;s password:</div><div class="line">Linux raspberrypi 4.14.34-v7+ #1110 SMP Mon Apr 16 15:18:51 BST 2018 armv7l</div><div class="line"></div><div class="line">The programs included with the Debian GNU/Linux system are free software;</div><div class="line">the exact distribution terms for each program are described in the</div><div class="line">individual files in /usr/share/doc/*/copyright.</div><div class="line"></div><div class="line">Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent</div><div class="line">permitted by applicable law.</div><div class="line">You have new mail.</div><div class="line">Last login: Fri Jun 15 21:19:09 2018</div><div class="line"></div><div class="line">SSH is enabled and the default password for the &apos;pi&apos; user has not been changed.</div><div class="line">This is a security risk - please login as the &apos;pi&apos; user and type &apos;passwd&apos; to set  a new password.</div><div class="line"></div><div class="line">pi@raspberrypi:~ $</div></pre></div></div></figure></p>
+<p>然后配置所需要的环境，pip安装好所需要的文件，利用ssh将文件上传到服务器上。<br><figure class="highlight elixir"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></div><div class="code"><pre><div class="line">pi<span class="variable">@raspberrypi</span><span class="symbol">:~/Public/dean</span> <span class="variable">$ </span>ls</div><div class="line">buildhtml.py  demo.py  Helpermysql.py  index.html  __pycache_<span class="number">_</span>  sendmail.py  spider.py</div><div class="line">pi<span class="variable">@raspberrypi</span><span class="symbol">:~/Public/dean</span> $</div></pre></div></div></figure></p>
+<h3 id="2、数据库的配置"><a href="#2、数据库的配置" class="headerlink" title="2、数据库的配置"></a>2、数据库的配置</h3><p>安装数据库：<br><figure class="highlight routeros"><figcaption><span class="caption">安装数据库</span></figcaption><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></div><div class="code"><pre><div class="line">sudo apt-<span class="builtin-name">get</span> install mysql-server</div><div class="line">apt-<span class="builtin-name">get</span> isntall mysql-client</div><div class="line">sudo apt-<span class="builtin-name">get</span> install libmysqlclient-dev</div></pre></div></div></figure></p>
+<p>安装完成后我们进入mysql创建数据库与表单。<br><figure class="highlight python"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></div><div class="code"><pre><div class="line">pi@raspberrypi:~/Public/dean $ sudo mysql -u root -p</div><div class="line">Enter password:</div><div class="line">Welcome to the MariaDB monitor.  Commands end <span class="keyword">with</span> ; <span class="keyword">or</span> \g.</div><div class="line">Your MariaDB connection id <span class="keyword">is</span> <span class="number">7</span></div><div class="line">Server version: <span class="number">10.1</span><span class="number">.23</span>-MariaDB<span class="number">-9</span>+deb9u1 Raspbian <span class="number">9.0</span></div><div class="line"></div><div class="line">Copyright (c) <span class="number">2000</span>, <span class="number">2017</span>, Oracle, MariaDB Corporation Ab <span class="keyword">and</span> others.</div><div class="line"></div><div class="line">Type <span class="string">'help;'</span> <span class="keyword">or</span> <span class="string">'\h'</span> <span class="keyword">for</span> help. Type <span class="string">'\c'</span> to clear the current input statement.</div><div class="line"></div><div class="line">MariaDB [(none)]&gt;</div><div class="line">MariaDB [(none)]&gt; show databases;  <span class="comment">#显示存在的数据库名名称</span></div><div class="line">+--------------------+</div><div class="line">| Database           |</div><div class="line">+--------------------+</div><div class="line">| information_schema |</div><div class="line">| mysql              |</div><div class="line">| performance_schema |</div><div class="line">| school_info        |</div><div class="line">+--------------------+</div><div class="line"><span class="number">4</span> rows <span class="keyword">in</span> set (<span class="number">0.01</span> sec)</div><div class="line"></div><div class="line">MariaDB [(none)]&gt;create database school_info default character set utf8 ;   <span class="comment">#创建数据库</span></div><div class="line">MariaDB [(none)]&gt; use school_info</div><div class="line">Reading table information <span class="keyword">for</span> completion of table <span class="keyword">and</span> column names</div><div class="line">You can turn off this feature to get a quicker startup <span class="keyword">with</span> -A</div><div class="line"></div><div class="line">Database changed</div><div class="line">MariaDB [school_info]&gt;create table table_name(字段<span class="number">1</span> 类型，字段<span class="number">2</span> 类型 ， … ) ;  <span class="comment">#没写完，自己补充</span></div></pre></div></div></figure></p>
+<p>数据库用户以及密码设置。<br>1、安装时提示我们输如密码，这个密码就是root用户密码。<br>2、安装时没有提示密码，但是可以进入。<br><figure class="highlight python"><div class="figcode"><div class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></div><div class="code"><pre><div class="line">MariaDB [(none)]&gt; use mysql;</div><div class="line">Reading table information <span class="keyword">for</span> completion of table <span class="keyword">and</span> column names</div><div class="line">You can turn off this feature to get a quicker startup <span class="keyword">with</span> -A</div><div class="line"></div><div class="line">Database changed</div><div class="line">MariaDB [mysql]&gt; show tables;</div><div class="line">+---------------------------+</div><div class="line">| Tables_in_mysql           |</div><div class="line">+---------------------------+</div><div class="line">| column_stats              |</div><div class="line">| columns_priv              |</div><div class="line">| db                        |</div><div class="line">| event                     |</div><div class="line">| func                      |</div><div class="line">| general_log               |</div><div class="line">| gtid_slave_pos            |</div><div class="line">| help_category             |</div><div class="line">| help_keyword              |</div><div class="line">| help_relation             |</div><div class="line">| help_topic                |</div><div class="line">| host                      |</div><div class="line">| index_stats               |</div><div class="line">| innodb_index_stats        |</div><div class="line">| innodb_table_stats        |</div><div class="line">| plugin                    |</div><div class="line">| proc                      |</div><div class="line">| procs_priv                |</div><div class="line">| proxies_priv              |</div><div class="line">| roles_mapping             |</div><div class="line">| servers                   |</div><div class="line">| slow_log                  |</div><div class="line">| table_stats               |</div><div class="line">| tables_priv               |</div><div class="line">| time_zone                 |</div><div class="line">| time_zone_leap_second     |</div><div class="line">| time_zone_name            |</div><div class="line">| time_zone_transition      |</div><div class="line">| time_zone_transition_type |</div><div class="line">| user                      |</div><div class="line">+---------------------------+</div><div class="line"><span class="number">30</span> rows <span class="keyword">in</span> set (<span class="number">0.00</span> sec)</div><div class="line"></div><div class="line">MariaDB [mysql]&gt; select * <span class="keyword">from</span> user;</div><div class="line">+-----------+------+----------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+----------+------------+-------------+--------------+---------------+-------------+-----------------+----------------------+-----------------------+-------------------------------------------+------------------+---------+--------------+--------------------+</div><div class="line">| Host      | User | Password | Select_priv | Insert_priv | Update_priv | Delete_priv | Create_priv | Drop_priv | Reload_priv | Shutdown_priv | Process_priv | File_priv | Grant_priv | References_priv | Index_priv | Alter_priv | Show_db_priv | Super_priv | Create_tmp_table_priv | Lock_tables_priv | Execute_priv | Repl_slave_priv | Repl_client_priv | Create_view_priv | Show_view_priv | Create_routine_priv | Alter_routine_priv | Create_user_priv | Event_priv | Trigger_priv | Create_tablespace_priv | ssl_type | ssl_cipher | x509_issuer | x509_subject | max_questions | max_updates | max_connections | max_user_connections | plugin                | authentication_string                     | password_expired | is_role | default_role | max_statement_time |</div><div class="line">+-----------+------+----------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+----------+------------+-------------+--------------+---------------+-------------+-----------------+----------------------+-----------------------+-------------------------------------------+------------------+---------+--------------+--------------------+</div><div class="line">| localhost | root |          | Y           | Y           | Y           | Y           | Y           | Y         | Y           | Y             | Y            | Y         | Y          | Y               | Y          | Y          | Y            | Y          | Y                     | Y                | Y            | Y               | Y                | Y                | Y              | Y                   | Y                  | Y                | Y          | Y            | Y                      |          |            |             |              |             <span class="number">0</span> |           <span class="number">0</span> |               <span class="number">0</span> |                    <span class="number">0</span> | mysql_native_password | *<span class="number">6582</span>D3BC798527E9D7BE22AD01F78F2D2A1669AD | N                | N       |              |           <span class="number">0.000000</span> |</div><div class="line">+-----------+------+----------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+----------+------------+-------------+--------------+---------------+-------------+-----------------+----------------------+-----------------------+-------------------------------------------+------------------+---------+--------------+--------------------+</div><div class="line"><span class="number">1</span> row <span class="keyword">in</span> set (<span class="number">0.00</span> sec)</div><div class="line"><span class="comment">#我们看到在用户里面有有root用户，然后需要我们修改其密码</span></div><div class="line"></div><div class="line">MariaDB [mysql]&gt;SET PASSWORD FOR <span class="string">'root'</span>@<span class="string">'localhost'</span> = PASSWORD(<span class="string">'newpass'</span>);</div></pre></div></div></figure></p>
+<p>3、对于用root用户与密码进入不了，但是可以直接sudo mysql进入的用户，处理方法见后面疑难杂症。</p>
+<h3 id="2、定时服务的配置"><a href="#2、定时服务的配置" class="headerlink" title="2、定时服务的配置"></a>2、定时服务的配置</h3><p>在Linux系统中存在crontab的服务，也就是定时服务。   </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>佛系打赏！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/WeChatpay.png" alt="Leberte 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/Alipay.jpg" alt="Leberte 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Leberte
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://hirraeth.com/python/dean_spider_python/" title="python实现学校信息邮件定时发送并转发到班级QQ群——部署在树莓派">https://hirraeth.com/python/dean_spider_python/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束⁽⁽ଘ( ˊᵕˋ )ଓ⁾⁾感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" <i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/spider，树莓派/" <i class="fa fa-tag"></i> spider，树莓派</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/en/dairy/one/" rel="next" title="助辅日记（一）">
+                <i class="fa fa-chevron-left"></i> 助辅日记（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/toux.jpg"
+                alt="Leberte" />
+            
+              <p class="site-author-name" itemprop="name">Leberte</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/leberte" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:x2511903043@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+              <div id="days"></div>
+</script>
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("05/04/2018 15:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期所需python安装库"><span class="nav-number">1.</span> <span class="nav-text">前期所需python安装库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number"></span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、摘要"><span class="nav-number"></span> <span class="nav-text">一、摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、学校网站信息的爬取"><span class="nav-number"></span> <span class="nav-text">二、学校网站信息的爬取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、数据库的查询与写入"><span class="nav-number"></span> <span class="nav-text">三、数据库的查询与写入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库的操作封装"><span class="nav-number">1.</span> <span class="nav-text">数据库的操作封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库的写入与查询"><span class="nav-number">2.</span> <span class="nav-text">数据库的写入与查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、邮件的发送"><span class="nav-number"></span> <span class="nav-text">四、邮件的发送</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、QQ消息的发送"><span class="nav-number"></span> <span class="nav-text">五、QQ消息的发送</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、QQbot安装"><span class="nav-number">1.</span> <span class="nav-text">1、QQbot安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、代码的编写"><span class="nav-number">2.</span> <span class="nav-text">2、代码的编写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、邮件内容优化"><span class="nav-number"></span> <span class="nav-text">六、邮件内容优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、Linux环境的配置与定时服务"><span class="nav-number"></span> <span class="nav-text">七、Linux环境的配置与定时服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Linux环境的配置"><span class="nav-number">1.</span> <span class="nav-text">1、Linux环境的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、数据库的配置"><span class="nav-number">2.</span> <span class="nav-text">2、数据库的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、定时服务的配置"><span class="nav-number">3.</span> <span class="nav-text">2、定时服务的配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-id-card"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leberte</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">7.9k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">Hosted by <a target="_blank" href="https://github.com/leberte/leberte.github.io">GitHub Pages</a></div>
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4">
+  </script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4">
+  </script>
+
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://leberte.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://hirraeth.com/python/dean_spider_python/';
+          this.page.identifier = 'python//dean_spider_python/';
+          this.page.title = 'python实现学校信息邮件定时发送并转发到班级QQ群——部署在树莓派';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://leberte.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
