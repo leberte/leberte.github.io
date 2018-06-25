@@ -515,8 +515,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-06-21T22:23:01+08:00">
-                2018-06-21
+              <time title="更新于" itemprop="dateModified" datetime="2018-06-25T22:55:34+08:00">
+                2018-06-25
               </time>
             
           </span>
@@ -842,7 +842,6 @@
 
 
           
-
         </div>
         
           
@@ -1161,6 +1160,28 @@ show_date_time();
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'RBYhiwkxAmWIIcbpoJUskwAw-gzGzoHsz',
+        appKey: 'lpVuS58v2zVCWcpCI1ykaFDd',
+        placeholder: '快来发表评论吧~~~',
+        avatar:'monsterid',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

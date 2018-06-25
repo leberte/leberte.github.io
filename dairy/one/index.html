@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="Leberte的博客">
 <meta property="og:description" content="时间：2018年5月15日事件：学校公开招聘2018级本科生助理辅导员地点：http://yanghua.swjtu.edu.cn/WebSite/Head/Show.aspx?ID=45831  0x01、总章今天QQ机器人突然给我推送了一条消息：土木工程学院关于公开招聘2018级本科生助理辅导员的通知。看到时，内心很纠结，不知道到底该不该递交申请书。我自己很清楚，我是一个不喜欢热闹的人，面对">
 <meta property="og:locale" content="dairy">
-<meta property="og:updated_time" content="2018-06-21T14:23:01.135Z">
+<meta property="og:updated_time" content="2018-06-25T14:55:34.066Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="助辅日记（一）">
 <meta name="twitter:description" content="时间：2018年5月15日事件：学校公开招聘2018级本科生助理辅导员地点：http://yanghua.swjtu.edu.cn/WebSite/Head/Show.aspx?ID=45831  0x01、总章今天QQ机器人突然给我推送了一条消息：土木工程学院关于公开招聘2018级本科生助理辅导员的通知。看到时，内心很纠结，不知道到底该不该递交申请书。我自己很清楚，我是一个不喜欢热闹的人，面对">
@@ -324,8 +324,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-06-21T22:23:01+08:00">
-                2018-06-21
+              <time title="更新于" itemprop="dateModified" datetime="2018-06-25T22:55:34+08:00">
+                2018-06-25
               </time>
             
           </span>
@@ -427,10 +427,8 @@
 <li>新生入学教育期间：   <ul>
 <li>统一按照学校以及学院安排组织学生按时参加各项活动，做好活动中的组织工作。   </li>
 <li>积极主动地走访新生宿舍，了解有关思想动态，解决一些生活与思想上的问题。主动了解新生的特长和爱好，尽快了解新生的特点。    </li>
-<li>组织班级活动，增进新生之间的了解及班级的团结，并帮助新生熟悉校园各类环境。   <ul>
+<li>组织班级活动，增进新生之间的了解及班级的团结，并帮助新生熟悉校园各类环境。   </li>
 <li>与入学教育相配合，协助入学教育工作。   </li>
-</ul>
-</li>
 <li>配合辅导员选配临时班干部，并组织临时班干部做好初期的班级建设工作。组织学生学习有关文件，引导学生遵守学校纪律，建立起良好的课堂教学秩序。   </li>
 </ul>
 </li>
@@ -625,20 +623,22 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    </div>
-
-  
-
-
+  <div class="comments" id="comments"></div>
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+    <script>
+        new Valine({
+            av: AV,
+            el: '.comments',
+            notify: true, // 邮件提醒 v1.1.4新增，下一步中有具体的邮箱设置
+            verify: true,
+            app_id: '',
+            app_key: '',
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!'
+        });
+    </script>
+    
 
         </div>
         
@@ -999,6 +999,28 @@ show_date_time();
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'RBYhiwkxAmWIIcbpoJUskwAw-gzGzoHsz',
+        appKey: 'lpVuS58v2zVCWcpCI1ykaFDd',
+        placeholder: '快来发表评论吧~~~',
+        avatar:'monsterid',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 
