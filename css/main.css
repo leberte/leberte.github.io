@@ -2101,7 +2101,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #79b821;
+  background: #ff9fb5;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3583,5 +3583,11 @@ pre .deletion {
   transform: inherit !important;
 }
 article.post.post-type-normal {
-  background: #fff;
+  background: rgba(238,238,238,0.251);
+}
+body {
+  background: url("https://hirraeth.oss-cn-shanghai.aliyuncs.com/source/beijin.jpg?x-oss-process=style/beijing");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
 }
